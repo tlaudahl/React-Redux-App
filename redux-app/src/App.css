@@ -1,3 +1,11 @@
+body {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+html {
+  background-color: #0D1422;
+}
 .App {
   text-align: center;
 }
@@ -19,4 +27,207 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.characterList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1.875rem;
+  background: rgb(32,35,41) none repeat scroll 0% 0%;
+  min-height: calc(-80px + 60vh);
+}
+
+.cardsContainerOuter {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1260px;
+  min-height: 40vh;
+}
+
+.characterCards {
+  max-width: 300px;
+  border-radius: 0.625rem;
+  overflow: hidden;
+  margin-bottom: 0.625rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 2px 0px, rgba(0, 0, 0, 0.8) 0px 0px 0px 1px;
+}
+
+.cardHeader {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.cardImage {
+  width: 100%;
+  background: rgb(32, 35, 41) none repeat scroll 0% 0%;
+}
+
+.characterName {
+  width: 100%;
+  background: rgb(32, 35, 41) none repeat scroll 0% 0%;
+  opacity: 0.8;
+  position: absolute;
+  bottom: 0px;
+  padding: 0.625rem;
+}
+
+.characterName h2 {
+  color: rgb(245, 245, 245);
+  margin: 0px;
+  font-size: 1.625rem;
+  font-weight: 400;
+  font-stretch: expanded;
+}
+
+.characterName p {
+  color: rgb(187, 187, 187);
+  margin: 0px;
+  font-size: 0.875rem;
+}
+
+.characterInfo {
+  padding: 1.25rem;
+  color: rgb(255, 152, 0);
+  background: rgb(51, 51, 51) none repeat scroll 0% 0%;
+}
+
+.status, .species, .gender, .origin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0.75rem 0px 0.375rem;
+  border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.lastLocation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0.75rem 0px 0.375rem;
+}
+
+.status span, .species span, .gender span, .origin span {
+  font-size: .7rem;
+  font-weight: 400;
+  color: rgb(158, 158, 158);
+}
+
+.lastLocation span {
+  font-size: .7rem;
+  font-weight: 400;
+  color: rgb(158, 158, 158);
+  text-align: left;
+}
+
+.status p, .species p, .gender p, .origin p, .lastLocation p {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-size: .9rem;
+  font-weight: 200;
+  text-align: right;
+}
+
+
+.characterPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  background: rgb(32, 35, 41) none repeat scroll 0% 0%;
+}
+
+.episodesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.episode {
+  width: 33%;
+  background: rgb(32, 35, 41) none repeat scroll 0% 0%;
+  opacity: 0.8;
+  /* position: absolute; */
+  bottom: 0px;
+  padding: 0.625rem;
+}
+
+.episodeInfo {
+  padding: 1.25rem;
+  color: rgb(255, 152, 0);
+  background-color: rgb(51, 51, 51) none repeat scroll 0% 0%;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
+.episodeName, .episodeSeason, .airDate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0.75rem 0px 0.375rem;
+  border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.episodeName span, .episodeSeason span, .airDate span {
+  font-size: .7rem;
+  font-weight: 400;
+  color: rgb(158, 158, 158);
+}
+
+.episodeName p, .episodeSeason p, .airDate p {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-size: .9rem;
+  font-weight: 200;
+  text-align: right;
+}
+
+.characterPage > h1:nth-child(2) {
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #161C27;
+  padding: 1%;
+}
+
+.header h1 {
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.active {
+  color: rgb(255, 152, 0) !important;
+  text-decoration: underline !important;
+}
+
+.homePageText a {
+  color: rgb(255, 152, 0);
+  text-decoration: underline;
+}
+
+.homePageText {
+  color: white;
+  font-size: 1.6rem;
+}
+
+.homePage {
+  margin-top: 5%;
 }
