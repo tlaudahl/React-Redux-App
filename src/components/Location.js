@@ -59,9 +59,7 @@ const Location = props => {
                             <div className='characterCards'>
                             <div className='cardHeader'>
                                 <div className='cardImage'>
-                                <Link to={`/characters/${characters.id}`}>
                                     <img src={characters.image} alt={characters.name} />
-                                </Link>
                                 </div>
                                 <div className='characterName'>
                                     <h2>{characters.name}</h2>
@@ -98,9 +96,7 @@ const Location = props => {
                         <div key={character.id} className='characterCards'>
                         <div className='cardHeader'>
                             <div className='cardImage'>
-                            <Link to={`/characters/${character.id}`}>
                                 <img src={character.image} alt={character.name} />
-                            </Link>
                             </div>
                             <div className='characterName'>
                                 <h2>{character.name}</h2>
