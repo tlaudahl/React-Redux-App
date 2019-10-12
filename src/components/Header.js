@@ -7,6 +7,7 @@ export default function Header() {
             <NavLink exact to='/'>Home</NavLink>
             <h1>Rick and Morty</h1>
             <NavLink to='/characters'>Characters</NavLink>
+            <NavLink to='/locations'>Locations</NavLink>
         </div>
     )
 }

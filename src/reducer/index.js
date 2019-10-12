@@ -1,6 +1,7 @@
 import { 
     START_FETCHING,
-    FETCH_SUCCESS,
+    FETCH_SUCCESS_CHARACTERS,
+    FETCH_SUCCESS_LOCATIONS,
     FETCH_FAILURE
 } from '../actions'
 
@@ -21,10 +22,17 @@ const reducer = (state = initialState, action) => {
                 isFetching: true,
                 error: '',
             }
-        case FETCH_SUCCESS:
+        case FETCH_SUCCESS_CHARACTERS:
             return {
                 ...state,
                 characters: action.payload,
+                isFetching: false,
+                error: '',
+            }
+        case FETCH_SUCCESS_LOCATIONS:
+            return {
+                ...state,
+                locations: action.payload,
                 isFetching: false,
                 error: '',
             }
