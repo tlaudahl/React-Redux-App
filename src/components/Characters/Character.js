@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
+import { fetchCharacters } from '../../actions'
 import axios from 'axios';
 
 const Character = props => {
     const [episodes, setEpisodes] = useState([]);
     const [getDone, setGetDone] = useState(false);
+    console.log('Character PROPS', props);
 
     const character = props.characters.find(char => char.id === Number(props.match.params.id));
 
@@ -20,6 +22,7 @@ const Character = props => {
 
 
     useEffect(() => {
+        props.fetchCharacters();
         axios
             .get(`https://rickandmortyapi.com/api/episode/${episodesArray.join(',')}`)
             .then(res => {
@@ -28,8 +31,6 @@ const Character = props => {
             })
             .catch(err => console.error(err));
     }, [])
-
-    console.log(episodes.hasOwnProperty('name'));
 
     return (
         <div className='characterPage'>
@@ -90,7 +91,7 @@ const Character = props => {
                 {episodes.length > 0 && 
                     episodes.map(item => {
                     return (
-                        <div className='episode'>
+                        <div key={item.id} className='episode'>
                             <div className='episodeInfo'>
                                 <div className='episodeName'>
                                     <span>EPISODE</span>
@@ -121,4 +122,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(Character);
+export default connect(mapStateToProps, { fetchCharacters })(Character);

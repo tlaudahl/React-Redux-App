@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import { fetchCharacters } from '../actions'
+import { fetchCharacters } from '../../actions'
 import CharacterCard from './CharacterCard';
 
 const CharacterList = props => {
