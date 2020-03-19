@@ -9,7 +9,7 @@ const Location = props => {
 
     const location = props.locations.find(location => location.id === Number(props.match.params.id));
 
-    var charactersArray = []
+    let charactersArray = []
 
     if (location.residents.length === 1) {
         charactersArray.push(location.residents.toString().split('/')[5])
@@ -28,7 +28,7 @@ const Location = props => {
                 setGetDone(true);
             })
             .catch(err => console.error(err));
-    }, [])
+    }, [location])
 
     return (
         <div className='characterPage'>

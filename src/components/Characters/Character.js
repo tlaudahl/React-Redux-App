@@ -22,7 +22,7 @@ const Character = props => {
 
 
     useEffect(() => {
-        props.fetchCharacters();
+        // props.fetchCharacters();
         axios
             .get(`https://rickandmortyapi.com/api/episode/${episodesArray.join(',')}`)
             .then(res => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import { fetchLocations } from '../actions';
+import { fetchLocations } from '../../actions';
 import LocationsCard from './LocationsCard';
 
 const CharacterList = props => {
@@ -13,7 +13,7 @@ const CharacterList = props => {
     }
 
     return (
-        <div className='characterList'>
+        <div className='list'>
             {props.error && <p>{props.error}</p>}
             {props.locations.map(location => {
                 return <LocationsCard key={location.id} location={location} />

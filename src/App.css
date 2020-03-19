@@ -29,7 +29,7 @@ html {
   color: #09d3ac;
 }
 
-.characterList, .locationsList {
+.list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -112,7 +112,7 @@ html {
   background: rgb(51, 51, 51) none repeat scroll 0% 0%;
 }
 
-.status, .species, .gender, .origin, .name, .dimension, .type, .residents {
+.status, .species, .gender, .origin, .name, .dimension, .type, .residents, .air_date {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -133,6 +133,22 @@ html {
   font-size: .7rem;
   font-weight: 400;
   color: rgb(158, 158, 158);
+}
+
+.air_date span {
+  font-size: .7rem;
+  font-weight: 400;
+  color: rgb(158, 158, 158);
+  width: 22%;
+}
+
+.air_date p {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-size: .9rem;
+  font-weight: 200;
+  text-align: right;
 }
 
 .lastLocation span {
@@ -247,4 +263,12 @@ a {
 
 .homePage {
   margin-top: 5%;
+}
+
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

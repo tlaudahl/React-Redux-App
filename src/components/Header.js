@@ -8,6 +8,7 @@ export default function Header() {
             <h1>Rick and Morty</h1>
             <NavLink to='/characters'>Characters</NavLink>
             <NavLink to='/locations'>Locations</NavLink>
+            <NavLink to='/episodes'>Episodes</NavLink>
         </div>
     )
 }
