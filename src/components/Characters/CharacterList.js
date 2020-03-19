@@ -1,44 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
+import ScaleLoader from "react-spinners/ScaleLoader";
+import { css } from "@emotion/core";
 import { fetchCharacters } from '../../actions'
 import CharacterCard from './CharacterCard';
 
+const override = css`
+    border-color: red;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+`;
+
 const CharacterList = props => {
+    const [loaded, setLoaded] = useState(false)
+
     useEffect(() => {
-        console.log('char list props', props)
         if(props.nextPage === '') {
             props.fetchCharacters('https://rickandmortyapi.com/api/character/')
+            setTimeout(() => { setLoaded(true)}, 1500)
         } else {
-            console.log(props.nextPage.split('='))
             props.fetchCharacters('https://rickandmortyapi.com/api/character/')
+            setLoaded(true)
             // props.fetchCharacters(props.nextPage);
         }
-
     }, [])
 
-    if (props.isFetching) {
-        return <h2>Loading...</h2>
-    }
-
-    const getNextPage = () => {
-        props.fetchCharacters(props.nextPage);
-        console.log(props.characters)
-    }
-
-    return (
+    if(loaded) {
+        return (
         <div className='list'>
             {props.characters.map(character => {
                 return <CharacterCard key={character.id} character={character} />
             })}
         </div>
-    )
+        )
+    } else {
+        return (
+            <div className='list'>
+                <ScaleLoader
+                css={override}
+                size={150}
+                color={'rgb(255, 152, 0)'}
+                loading={!loaded}
+                />
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = state => {
     return {
         characters: state.characters,
         isFetching: state.isFetching,
-        error: state.error,
         nextPage: state.nextPage
     }
 }

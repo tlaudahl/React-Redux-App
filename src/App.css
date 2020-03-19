@@ -79,6 +79,10 @@ html {
 }
 
 .cardImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
   background: rgb(32, 35, 41) none repeat scroll 0% 0%;
 }
