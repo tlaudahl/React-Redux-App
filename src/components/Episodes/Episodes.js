@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ScaleLoader from "react-spinners/ScaleLoader";
 import axios from 'axios';
 
-const Location = props => {
+const Episode = props => {
     const [characters, setCharacters] = useState([]);
-    const [getDone, setGetDone] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
-    const location = props.locations.find(location => location.id === Number(props.match.params.id));
+    const episode = props.episodes.find(episode => episode.id === Number(props.match.params.id));
 
-    var charactersArray = []
+    let charactersArray = []
 
-    if (location.residents.length === 1) {
-        charactersArray.push(location.residents.toString().split('/')[5])
+    if (episode.characters.length === 1) {
+        charactersArray.push(episode.characters.toString().split('/')[5])
     } else {
-        charactersArray = location.residents.map(resident => {
-            return resident.split('/')[5]
+        charactersArray = episode.characters.map(character => {
+            return character.split('/')[5]
         })
     }
 
@@ -25,30 +26,31 @@ const Location = props => {
             .get(`https://rickandmortyapi.com/api/character/${charactersArray.join(',')}`)
             .then(res => {
                 setCharacters(res.data);
-                setGetDone(true);
+                setTimeout(() => { setLoaded(true) }, 1250)
             })
             .catch(err => console.error(err));
-    }, [])
+    }, [episode])
 
-    return (
-        <div className='characterPage'>
+    if (loaded) {
+        return (
+            <div className='characterPage'>
             <div className='locationCards'>
                 <div className='locationInfo'>
                     <div className='name'>
                         <span>NAME</span>
-                        <p>{location.name}</p>
+                        <p>{episode.name}</p>
                     </div>
-                    <div className='dimension'>
-                        <span>DIMENSION</span>
-                        <p>{location.dimension}</p>
+                    <div className='air_date'>
+                        <span>AIR DATE</span>
+                        <p>{episode.air_date}</p>
                     </div>
                     <div className='type'>
-                        <span>TYPE</span>
-                        <p>{location.type}</p>
+                        <span>EPISODE</span>
+                        <p>{episode.episode}</p>
                     </div>
                     <div className='residents'>
-                        <span>RESIDENTS</span>
-                        <p>{location.residents.length}</p>
+                        <span>CHARACTERS</span>
+                        <p>{episode.characters.length}</p>
                     </div>
                 </div>
             </div>
@@ -59,7 +61,9 @@ const Location = props => {
                             <div className='characterCards'>
                             <div className='cardHeader'>
                                 <div className='cardImage'>
-                                    <img src={characters.image} alt={characters.name} />
+                                    <Link to={`/characters/${characters.id}`}>
+                                        <img src={characters.image} alt={characters.name} />
+                                    </Link>
                                 </div>
                                 <div className='characterName'>
                                     <h2>{characters.name}</h2>
@@ -96,7 +100,9 @@ const Location = props => {
                         <div key={character.id} className='characterCards'>
                         <div className='cardHeader'>
                             <div className='cardImage'>
-                                <img src={character.image} alt={character.name} />
+                                {/* <Link to={`/characters/${character.id}`}> */}
+                                    <img src={character.image} alt={character.name} />
+                                {/* </Link> */}
                             </div>
                             <div className='characterName'>
                                 <h2>{character.name}</h2>
@@ -129,16 +135,27 @@ const Location = props => {
                     )
                 })}
             </div>
-        </div> 
-    )
+        </div>
+        )
+    } else {
+        return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '88vh', backgroundColor: '#202329' }}>
+            <ScaleLoader
+            size={150}
+            color={'rgb(255, 152, 0)'}
+            loading={!loaded}
+            />
+        </div>
+        )
+    }
 }
 
 
 const mapStateToProps = state => {
     return {
-        locations: state.locations,
+        episodes: state.episodes,
         isFetching: state.isFetching,
     }
 }
 
-export default connect(mapStateToProps, {})(Location);
+export default connect(mapStateToProps, {})(Episode);

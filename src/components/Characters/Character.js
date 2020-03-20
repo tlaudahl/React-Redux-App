@@ -1,16 +1,18 @@
+/* eslint-disable no-unused-expressions */
+
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { fetchCharacters } from '../../actions'
 import axios from 'axios';
 
 const Character = props => {
     const [episodes, setEpisodes] = useState([]);
-    const [getDone, setGetDone] = useState(false);
-    console.log('Character PROPS', props);
+    const [loaded, setLoaded] = useState(false);
 
     const character = props.characters.find(char => char.id === Number(props.match.params.id));
 
-    var episodesArray = []
+    let episodesArray = []
 
     if (character.episode.length === 1) {
         episodesArray.push(character.episode.toString().split('/')[5])
@@ -22,18 +24,21 @@ const Character = props => {
 
 
     useEffect(() => {
-        props.fetchCharacters();
+        // props.fetchCharacters();
         axios
             .get(`https://rickandmortyapi.com/api/episode/${episodesArray.join(',')}`)
             .then(res => {
                 setEpisodes(res.data);
-                setGetDone(true);
             })
             .catch(err => console.error(err));
+            setTimeout(() => {
+                setLoaded(true)
+            }, 1500)
     }, [])
 
-    return (
-        <div className='characterPage'>
+    if(loaded) {
+        return (
+            <div className='characterPage'>
             <div className='characterCards'>
                 <div className='cardHeader'>
                     <div className='cardImage'>
@@ -110,14 +115,24 @@ const Character = props => {
                     )
                 })}
             </div>
-        </div> 
-    )
+        </div>
+        )
+    } else if (!loaded) {
+        return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '95vh', backgroundColor: '#202329' }}>
+            <ScaleLoader
+            size={150}
+            color={'rgb(255, 152, 0)'}
+            loading={!loaded}
+            />
+        </div>)
+    }
 }
-
 
 const mapStateToProps = state => {
     return {
         characters: state.characters,
+        // episodes: state.episodes,
         isFetching: state.isFetching,
     }
 }
