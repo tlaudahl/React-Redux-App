@@ -18,7 +18,6 @@ function EpisodeList(props) {
     if(loaded) {
         return (
             <div className='list'>
-                {console.log(props.episodes)}
                 {props.episodes.map(episode => {
                     return <EpisodeCard key={episode.id} episode={episode} />
                 })}

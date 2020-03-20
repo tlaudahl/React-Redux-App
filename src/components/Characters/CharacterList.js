@@ -36,7 +36,7 @@ const CharacterList = props => {
         )
     } else {
         return (
-            <div className='list'>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '95vh', backgroundColor: '#202329' }}>
                 <ScaleLoader
                 css={override}
                 size={150}

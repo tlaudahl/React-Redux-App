@@ -245,9 +245,13 @@ html {
   color: white;
 }
 
+.header a {
+  font-size: 20px;
+  color: white;
+}
+
 a {
   text-decoration: none;
-  color: white;
 }
 
 .active {
