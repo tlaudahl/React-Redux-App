@@ -14,6 +14,7 @@ const initialState = {
     isFetching: false,
     error: '',
     nextPage: '',
+    charCount: '',
 }
 
 
@@ -32,6 +33,8 @@ const reducer = (state = initialState, action) => {
                 isFetching: false,
                 error: '',
                 nextPage: action.payload.info.next,
+                charCount: action.payload.info.count,
+                pages: action.payload.info.pages,
             }
         case FETCH_SUCCESS_LOCATIONS:
             return {
