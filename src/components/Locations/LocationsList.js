@@ -3,24 +3,28 @@ import { connect } from 'react-redux';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { fetchLocations } from '../../actions';
 import LocationsCard from './LocationsCard';
+import PaginationComponent from '../PaginationComponent';
 
 const CharacterList = props => {
     const [loaded, setLoaded] = useState(false)
     useEffect(() => {
-        props.fetchLocations();
+        setLoaded(false)
+        props.fetchLocations(`https://rickandmortyapi.com/api/location/?page=${props.location.pathname.split('/')[3]}`);
         setTimeout(() => {
             setLoaded(true)
-        }, 1000)
-    }, [])
-
+        }, 1250)
+    }, [props.location.pathname])
 
     if(loaded) {
         return (
-        <div className='list'>
-            {props.locations.map(location => {
-                return <LocationsCard key={location.id} location={location} />
-            })}
-        </div>
+        <>
+            <div className='list'>
+                {props.locations.map(location => {
+                    return <LocationsCard key={location.id} location={location} />
+                })}
+            </div>
+            <PaginationComponent history={props.history} />
+        </>
         )
     } else {
         return (
@@ -38,7 +42,6 @@ const CharacterList = props => {
 const mapStateToProps = state => {
     return {
         locations: state.locations,
-        isFetching: state.isFetching,
     }
 }
 

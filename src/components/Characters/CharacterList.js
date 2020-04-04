@@ -4,9 +4,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { css } from "@emotion/core";
 import { fetchCharacters } from '../../actions'
 import CharacterCard from './CharacterCard';
-import PaginationComponent from './PaginationComponent';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
+import PaginationComponent from '../PaginationComponent';
 
 const override = css`
     border-color: red;
@@ -21,7 +19,7 @@ const CharacterList = props => {
     useEffect(() => {
         setLoaded(false)
         props.fetchCharacters(`https://rickandmortyapi.com/api/character/?page=${props.location.pathname.split('/')[3]}`)
-        setTimeout(() => setLoaded(true), 1500)
+        setTimeout(() => setLoaded(true), 1250)
     }, [props.location.pathname])
 
     if(loaded) {
@@ -32,7 +30,7 @@ const CharacterList = props => {
                     return <CharacterCard key={character.id} character={character} />
                 })}
             </div>
-            <PaginationComponent loaded={loaded} setLoaded={setLoaded} history={props.history} />
+            <PaginationComponent history={props.history} />
         </>
         )
     } else {
