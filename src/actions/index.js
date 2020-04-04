@@ -24,10 +24,10 @@ export const fetchNextPage = (pageNumber) => dispatch => {
         .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
 }
 
-export const fetchLocations = () => dispatch => {
+export const fetchLocations = (url) => dispatch => {
     axios
-        .get('https://rickandmortyapi.com/api/location/')
-        .then(res => dispatch({ type: FETCH_SUCCESS_LOCATIONS, payload: res.data.results }))
+        .get(url)
+        .then(res => dispatch({ type: FETCH_SUCCESS_LOCATIONS, payload: res.data }))
         .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
 }
 

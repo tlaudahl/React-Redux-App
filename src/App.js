@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
+import Footer from './components/Footer'
 // <--------Character Components -------->
-import CharacterList from './components/Characters/CharacterList'
+import CharacterList from './components/Characters/CharacterList';
 import Character from './components/Characters/Character';
 // <--------Location Components -------->
 import LocationList from './components/Locations/LocationsList';
@@ -20,18 +21,19 @@ import Episode from './components/Episodes/Episodes';
 function App() {
   return (
     <div className="App">
-      <Route path='/' component={Header} />
+      <Route path='/' render={props => <Header {...props} />} />
       <Route exact path='/' component={HomePage} />
       {/* <------ Character Routes --------> */}
-      <Route exact path='/characters' component={CharacterList} />
+      <Route exact path='/characters/page/:num' render={props => <CharacterList {...props} />} />
       <Route exact path='/characters/:id' render={props => <Character {...props} />} />
+      {/* <Route path='/characters' render={props => <Pagination charPerPage={props.characters.length} totalChars={props.charCount}/>} /> */}
       {/* <------ Location Routes --------> */}
-      <Route exact path='/locations' component={LocationList} />
+      <Route exact path='/locations/page/:num' render={props => <LocationList {...props} />} />
       <Route exact path='/locations/:id' render={props => <Location {...props} />} />
-      {/* <Route path='/characters' render={props => <Footer {...props} />} /> */}
       {/* <------ Episode Routes --------> */}
       <Route exact path='/episodes' component={EpisodeList} />
       <Route exact path='/episodes/:id' render={props => <Episode {...props} />} />
+      {/* <Route path='/' component={Footer} /> */}
     </div>
   );
 }

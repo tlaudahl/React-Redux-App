@@ -1,25 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchNextPage } from '../actions';
 
 const Footer = props => {
-    console.log('Footer Props', props.match.url);
-    console.log('Footer Page?', props.page);
     return (
-        <footer>
-            <button>Prev</button>
-            <Link to={`/characters/page${props.page}`}><button onClick={() => fetchNextPage(props.page+1)}>Next</button></Link>
+        <footer style={{ height: '15vh', boxShadow: `0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24)` }}>
+            <p>Made by: <a href='https://github.com/tlaudahl'>Travis Laudahl</a></p>
+            <p>Inspired By: <a href='https://rickandmortyapi.com/'>Rick and Morty API</a></p>
         </footer>
     )
 }
 
-
-const mapStateToProps = state => {
-    return {
-        characters: state.characters,
-        page: state.page,
-    }
-}
-
-export default connect(mapStateToProps, { fetchNextPage })(Footer);
+export default Footer

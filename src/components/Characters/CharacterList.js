@@ -4,6 +4,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { css } from "@emotion/core";
 import { fetchCharacters } from '../../actions'
 import CharacterCard from './CharacterCard';
+import PaginationComponent from '../PaginationComponent';
 
 const override = css`
     border-color: red;
@@ -16,23 +17,21 @@ const CharacterList = props => {
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        if(props.nextPage === '') {
-            props.fetchCharacters('https://rickandmortyapi.com/api/character/')
-            setTimeout(() => { setLoaded(true)}, 1500)
-        } else {
-            props.fetchCharacters('https://rickandmortyapi.com/api/character/')
-            setLoaded(true)
-            // props.fetchCharacters(props.nextPage);
-        }
-    }, [])
+        setLoaded(false)
+        props.fetchCharacters(`https://rickandmortyapi.com/api/character/?page=${props.location.pathname.split('/')[3]}`)
+        setTimeout(() => setLoaded(true), 1250)
+    }, [props.location.pathname])
 
     if(loaded) {
         return (
-        <div className='list'>
-            {props.characters.map(character => {
-                return <CharacterCard key={character.id} character={character} />
-            })}
-        </div>
+        <>
+            <div className='list'>
+                {props.characters.map(character => {
+                    return <CharacterCard key={character.id} character={character} />
+                })}
+            </div>
+            <PaginationComponent history={props.history} />
+        </>
         )
     } else {
         return (
@@ -52,7 +51,9 @@ const mapStateToProps = state => {
     return {
         characters: state.characters,
         isFetching: state.isFetching,
-        nextPage: state.nextPage
+        nextPage: state.nextPage,
+        charCount: state.charCount,
+        pages: state.pages
     }
 }
 
